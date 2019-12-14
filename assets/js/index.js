@@ -24,8 +24,8 @@ function renderSubtitle(year, num, id) {
  * @param {String} name   student.chinese_name
  * @param {String} nation student.nationality
  */
-function renderLine_1(name, nation) {
-  document.getElementById('line_1')
+function renderLineName(name, nation) {
+  document.getElementById('line_name')
     .innerText = `學生　${name}　　　${nation}`;
 }
 
@@ -34,8 +34,8 @@ function renderLine_1(name, nation) {
  * @param {String} month month
  * @param {String} day   day
  */
-function renderLine_2(year, month, day) {
-  document.getElementById('line_2')
+function renderLineBirth(year, month, day) {
+  document.getElementById('line_birth')
     .innerText = `中華民國${year}年${month}月${day}生`;
 }
 
@@ -46,9 +46,9 @@ function renderLine_2(year, month, day) {
  * @param {String} s_degree short_degree
  * @param {String} title    title
  */
-function renderLine_34(colg, degree, rule, s_degree, title) {
-  document.getElementById('line_34')
-    .innerText = setBreakLine(`在本校　${colg}　${degree}　${rule}　${s_degree}　${title}　學位`);
+function renderIssue(colg, degree, rule, s_degree, title) {
+  document.getElementById('line_issue')
+    .innerText = setBreakLine(`在本校　${colg}　${degree}\n${rule}　${s_degree}　${title}　學位`);
 }
 
 /**
@@ -103,13 +103,32 @@ function renderRename(year, month, day, name) {
     .innerText = `中華民國 ${year} 年 ${month} 月 ${day} 日\n核准更改姓名為 ${name}`;
 }
 
+function renderReissue(
+  gradyear,
+  gradmonth,
+  colg,
+  degree,
+  s_degree,
+  title,
+) {
+  let renderString = "";
+  renderString += `於${gradyear}年${gradmonth}月在本校\n`;
+  renderString += `${colg}　${degree}\n`;
+  renderString += `畢業授予　${s_degree}　${title}　學位茲據該生申請前領證書遺失特予證明\n`;
+  document.getElementById('line_reissue')
+    .innerText = setBreakLine(renderString);
+}
+
 /**
  * @param {String | Number} year  chinese_graduate_year
  * @param {String | Number} month student.graduate_date.month
+ * @param {String | Number} day   (for reissue) please set "" in issue
  */
-function footerDate(year, month) {
+function footerDate(year, month, day) {
   document.getElementById('footer_date')
-    .innerText = `中 華 民 國 ${year} 年 ${month} 月`;
+    .innerText = `中 華 民 國 ${year} 年 ${month} 月${
+      day==="" ? "" : ` ${day} 日`
+    }`;
 }
 
 /** ***** ***** ***** ***** ***** *****
@@ -120,7 +139,7 @@ function handleOnResize() {
   const currentWidth = document.getElementsByTagName('body')[0].offsetWidth;
   document
     .getElementsByTagName('html')[0]
-    .style.fontSize = `${(20*currentWidth)/595}px`
+    .style.fontSize = `${(20*currentWidth)/595}px`;
 }
 
 /**
@@ -136,8 +155,9 @@ function setBreakLine(source) {
       count = 0;
     }
     if (count===20) {
-      target += '\n';
+      target += `${source[i]}\n`;
       count = 0;
+      continue;
     }
     target += source[i];
     count++;

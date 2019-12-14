@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./assets/css/ncku_ch.css" />
-    <title>中文初發</title>
+    <title>中文補發</title>
   </head>
   <body onresize="handleOnResize();">
     <div class="main" id="main">
       <div class="contain" id="contain">
-        <h1 class="title" id="cert-title"></h1>
+        <h1 class="title" id="cert-title">學位證明書</h1>
         <p class="subtitle" id="cert-subtitle"></p>
         <p class="text" id="line_name"></p>
         <p class="text" id="line_birth"></p>
-        <p class="text" id="line_issue"></p>
+        <p class="text" id="line_reissue"></p>
         <p class="text">此證</p>
         <p class="text" id="line_DoubleMajor"></p>
         <p class="text" id="line_Minor"></p>
@@ -38,21 +38,21 @@
     <script>
       (function() {
         // render
-        renderTitle('學士');
         renderSubtitle('(108)', '成大字第 1111 ', 'H34041165');
         renderLineName('我我我', '');
         renderLineBirth('八十六', '十二', '三十一');
-        renderIssue(
-          '工學院',
-          '機械工程學系學士班',
-          '修業期滿成績及格准予畢業依學位授予法之規定授予',
-          '工學',
-          '學士'
+        renderReissue(
+          "一百零五",
+          "十二",
+          "工學院",
+          "機械工程學系學士班",
+          "工學",
+          "學士"
         );
         renderDoubleMajor(['雙主修：文學院　中國文學系學士班'], '學士');
         renderMinor(['輔系：化學工程學系']);
         renderRename('', '', '', '');
-        footerDate(108, 1, "");
+        footerDate(108, 1, 24);
         // init
         handleOnResize();
       })();
