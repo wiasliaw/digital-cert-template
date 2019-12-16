@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>en</title>
+    <style>
+      html {
+        /* rem base */
+        font-size: 20px;
+      }
+      html,
+      body {
+        margin: 0;
+        min-width: 842px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      p {
+        margin: 0.15rem 0 0.15rem 0;
+        padding: 0;
+      }
+      .main {
+        position: relative;
+        width: 100%;
+        background-image: url('./assets/images/ncku_en.png');
+        background-color: white;
+        background-position: center;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+      }
+      .main::before {
+        content: '';
+        display: block;
+        padding-top: 70.66%;
+      }
+      .contain {
+        width: 100%;
+        text-align: center;
+        padding-left: 9.61%;
+        padding-right: 9.61%;
+        position: absolute;
+        top: 22.01%;
+        left: 0;
+      }
+      .footer {
+        position: absolute;
+        left: 9.61%;
+        bottom: 11.59%;
+      }
+      .title {
+        width: 100%;
+        margin: 0;
+        font-size: 1.5rem;
+        margin-bottom: 1.15rem;
+      }
+      .text {
+        font-size: 0.8rem;
+      }
+      #cert_no {
+        font-size: 0.5rem;
+      }
+      .principal {
+        width: 21.14%;
+        position: absolute;
+        top: 84.7%;
+        right: 16.74%;
+        border-top: 1px #707070 solid;
+      }
+    </style>
+  </head>
+  <body onresize="handleResize();">
+    <div class="main" id="main">
+      <div class="contain" id="contain">
+        <h1 class="title" id="cert-title">
+          NATIONAL CHENG KUNG UNIVERSITY
+        </h1>
+        <p class="text">
+          on the recommendation of the faculty of
+        </p>
+        <p class="text" id="department"></p>
+        <p class="text" id="double_major"></p>
+        <p class="text">
+          has conferred upon
+        </p>
+        <p class="text" id="name"></p>
+        <p class="text">
+          the degree of
+        </p>
+        <p class="text" id="degree"></p>
+        <p class="text" id="minor"></p>
+        <p class="text">
+          together with all the honors, rights and privileges belonging to that
+          degree.
+        </p>
+        <p class="text" id="date"></p>
+      </div>
+
+      <div class="footer">
+        <p class="text" id="cert_no"></p>
+      </div>
+
+      <div class="principal">
+        <p style="font-size: 0.75rem;text-align: center;  line-height: 1.27;">
+          Huey-Jen Su, Sc.D.
+          <br />
+          President
+        </p>
+      </div>
+    </div>
+    <script>
+      (function() {
+        // render
+        renderDepartAndCollege(
+          'Computer Science and Information Engineering',
+          'Electrical Engineering and Computer Science'
+        );
+        renderDoubleMajor('Mathematics', 'Science');
+        renderName('ERNST PIERRE', '皮宜恩');
+        renderDegree('Science');
+        renderMinor('Economics');
+        renderDate('January 2019');
+        renderCertNo('201903-4122', 'H34061141');
+        // init
+        handleResize();
+      })();
+      // render
+      function renderDepartAndCollege(department, college) {
+        document.getElementById('department').innerText =
+          'the Department of ' + department + ',\nCollege of ' + college + ',';
+      }
+      function renderDoubleMajor(department, college) {
+        if (department === '') {
+          document.getElementById('double_major').style.display = 'none';
+        }
+        document.getElementById('double_major').innerText =
+          'and the Department of ' +
+          department +
+          ',\nCollege of ' +
+          college +
+          ',';
+      }
+      function renderName(en_name, ch_name) {
+        document.getElementById('name').innerHTML =
+          '<strong>' + en_name + '</strong>' + ' (' + ch_name + ')';
+      }
+      function renderDegree(degree) {
+        document.getElementById('degree').innerHTML =
+          '<strong>' + 'Bachelor of ' + degree + '<strong>';
+      }
+      function renderMinor(minor) {
+        if (minor === '') {
+          document.getElementById('minor').style.display = 'none';
+        }
+        document.getElementById('minor').innerText = 'with a minor in ' + minor;
+      }
+      function renderDate(date) {
+        document.getElementById('date').innerText =
+          'In witness whereof, this diploma is issued with the university seal in ' +
+          date +
+          '.';
+      }
+      function renderCertNo(date, id) {
+        document.getElementById('cert_no').innerText =
+          'Certificate No.: ' + date + '\nStudent ID : ' + id;
+      }
+      // api
+      function handleResize() {
+        var HTML = document.getElementsByTagName('html')[0];
+        HTML.style.fontSize = (20 * HTML.offsetWidth) / 842 + 'px';
+      }
+    </script>
+  </body>
+</html>
